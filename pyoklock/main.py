@@ -10,7 +10,7 @@ from prompt_toolkit.layout.dimension import Dimension as D
 from prompt_toolkit.layout.dimension import to_dimension
 from prompt_toolkit.layout.containers import VSplit, HSplit
 import argparse
-from utils import BigClock
+from .utils import BigClock
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--second', action='store_true', help='print second')
 
