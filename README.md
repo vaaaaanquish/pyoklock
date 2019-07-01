@@ -5,9 +5,14 @@ python cli clock. Display digital clock on terminal.
 
 # Usage
 
+## install
 ```
-python setup.py install
-pyoklock
+pip install pyoklock
+```
+
+## Usage
+```
+pyoklock -s
 ```
 
 If you want display `second`, add `-s` or `--second` to the argument.
