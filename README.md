@@ -44,7 +44,12 @@ pyoklock -g
 
 ![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/google_calender.png?raw=true)
 
-If you want to delete the cache, remove `~/.pyoklock/token.pickle`.
+If you want to delete the cache, remove `~/.pyoklock/token.pickle`.  
+If you want to limit the number of events, using `--events` args.  
+for example:
+```
+pyoklock -g --events 5
+```
 
 
 # Special thanks to
