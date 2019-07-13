@@ -10,12 +10,41 @@ python cli clock. Display digital clock on terminal.
 pip install pyoklock
 ```
 
-## Usage
+## args: second
+If you want display `second`, add `-s` or `--second` to the argument.
 ```
 pyoklock -s
 ```
 
-If you want display `second`, add `-s` or `--second` to the argument.
+
+## args: frame
+If you want display clock frame, add `-f` or `--frame` to the argument.
+```
+pyoklock -f
+```
+![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/frame.png?raw=true)
+
+
+## args: google_calender
+
+If you want display Google Calender's moost recent event, add `-g` or `--google_calender` to the argument.
+To use this args, you must get `Google API OAuth Client credentails`. 
+If you got `credentails`, put it at `~/.pyoklock/` with the name `credentails.json`
+
+OAuth Client credentails from: https://console.cloud.google.com/
+```
+mkdir ~/.pyoklock
+mv [[your credentail path]] ~/.pyoklock/credentials.json
+```
+
+Then run pyoklock.
+```
+pyoklock -g
+```
+
+![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/google_calender.png?raw=true)
+
+If you want to delete the cache, remove `~/.pyoklock/token.pickle`.
 
 
 # Special thanks to
