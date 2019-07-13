@@ -6,11 +6,14 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-install_requires = ['prompt-toolkit>=3.0.0']
+install_requires = [
+    'prompt-toolkit>=2.0.0', 'google-api-python-client',
+    'google-auth-httplib2', 'google-auth-oauthlib'
+]
 
 setup(
     name='pyoklock',
-    version='0.0.1',
+    version='0.0.2',
     description='python cli digital clock.',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
@@ -22,10 +25,6 @@ setup(
     packages=['pyoklock'],
     package_dir={'pyoklock': 'pyoklock'},
     package_data={'pyoklock': ['pyoklock/*']},
-    entry_points={
-        "console_scripts": [
-            "pyoklock = pyoklock.main:main"
-        ]
-    },
+    entry_points={"console_scripts": ["pyoklock = pyoklock.main:main"]},
     platforms='any',
 )
