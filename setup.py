@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name='pyoklock',
-    version='0.0.2',
+    version='0.0.3',
     description='python cli digital clock.',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",

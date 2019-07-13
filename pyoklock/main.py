@@ -8,9 +8,15 @@ from prompt_toolkit.layout.dimension import Dimension as D
 from prompt_toolkit.layout.dimension import to_dimension
 from prompt_toolkit.layout.containers import VSplit, HSplit
 import argparse
+import sys
+import pathlib
+current_dir = pathlib.Path(__file__).resolve().parent
+sys.path.append(str(current_dir))
 from clocks import BigClock
 from google_calender import GCalender
+
 parser = argparse.ArgumentParser()
+parser.add_argument('--events', type=int, default=10)
 parser.add_argument('-s', '--second', action='store_true', help='print second')
 parser.add_argument('-f', '--frame', action='store_true', help='print frame')
 parser.add_argument(
@@ -20,7 +26,7 @@ parser.add_argument(
     help='print google calender')
 
 
-def make_app(sec, width, frame=True, calender=True):
+def make_app(sec, width, frame=True, calender=True, events=10):
     """make auto refresh application class"""
     kb = KeyBindings()
 
@@ -44,7 +50,7 @@ def make_app(sec, width, frame=True, calender=True):
     if frame:
         body = Frame(body)
     if calender:
-        gcalender = GCalender()
+        gcalender = GCalender(events)
         under_text = Window(
             content=FormattedTextControl(text=gcalender.get_calender_text),
             width=gcalender.get_max_length(),
@@ -68,9 +74,11 @@ def make_app(sec, width, frame=True, calender=True):
 def main():
     args = parser.parse_args()
     if args.second:
-        app = make_app(True, 124, args.frame, args.google_calender)
+        app = make_app(True, 124, args.frame, args.google_calender,
+                       args.events)
     else:
-        app = make_app(False, 80, args.frame, args.google_calender)
+        app = make_app(False, 80, args.frame, args.google_calender,
+                       args.events)
     app.run()
 
 
