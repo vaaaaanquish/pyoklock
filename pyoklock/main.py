@@ -21,6 +21,11 @@ parser.add_argument(
 parser.add_argument('-s', '--second', action='store_true', help='print second')
 parser.add_argument('-f', '--frame', action='store_true', help='print frame')
 parser.add_argument(
+    '-c',
+    '--color',
+    action='store_true',
+    help='print 5min red, 15min green color')
+parser.add_argument(
     '-t', '--today', action='store_true', help='print today event only')
 parser.add_argument(
     '-g',
@@ -29,7 +34,7 @@ parser.add_argument(
     help='print google calender')
 
 
-def make_app(sec, width, frame=True, gcalender=None):
+def make_app(sec, width, frame=True, gcalender=None, color=False):
     """make auto refresh application class"""
     kb = KeyBindings()
 
@@ -43,7 +48,7 @@ def make_app(sec, width, frame=True, gcalender=None):
             Window(width=padding, always_hide_cursor=True)
         ])
 
-    clock = BigClock(sec=sec)
+    clock = BigClock(sec=sec, color=color, gcalender=gcalender)
     padding = to_dimension(D(preferred=0))
     body = Window(
         content=FormattedTextControl(text=clock.get_clock),
@@ -55,8 +60,9 @@ def make_app(sec, width, frame=True, gcalender=None):
     if gcalender is None:
         under_text = Window(height=padding, always_hide_cursor=True)
     else:
+        ct = gcalender.get_calender_text_formatted if color else gcalender.get_calender_text
         under_text = Window(
-            content=FormattedTextControl(text=gcalender.get_calender_text),
+            content=FormattedTextControl(text=ct),
             width=gcalender.get_max_length(),
             height=padding,
             always_hide_cursor=True)
@@ -75,12 +81,12 @@ def make_app(sec, width, frame=True, gcalender=None):
 
 def main():
     args = parser.parse_args()
-    gcalender = GCalender(args.events,
-                          args.today) if args.google_calender else None
+    gcalender = GCalender(args.events, args.today,
+                          args.color) if args.google_calender else None
     if args.second:
-        app = make_app(True, 124, args.frame, gcalender)
+        app = make_app(True, 124, args.frame, gcalender, args.color)
     else:
-        app = make_app(False, 80, args.frame, gcalender)
+        app = make_app(False, 80, args.frame, gcalender, args.color)
     app.run()
 
 

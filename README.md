@@ -45,17 +45,28 @@ pyoklock -g
 ![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/google_calender.png?raw=true)
 
 If you want to delete the cache, remove `~/.pyoklock/token.pickle`.  
+
+### print event num
 If you want to limit the number of events, using `--events` args.  
 for example:
 ```
 pyoklock -g --events 5
 ```
   
-If you want to put `event of today only`, using '-t' or `--today` args.  
+### event today only
+If you want to put `event of today only`, using `-t` or `--today` args.  
 for example:
 ```
 pyoklock -g -t --events 10
 ```
+
+### change the color
+If you want to change the color according to the time, using `-c` or `--color` args. It's function for alert.
+ - google calender events
+    - 5 minutes ago: Red
+    - within 15 minutes: Green
+
+![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/color.png?raw=true)
 
 
 # Special thanks to

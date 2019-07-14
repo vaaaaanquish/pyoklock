@@ -3,6 +3,7 @@ import unicodedata
 import pickle
 from os.path import exists
 from os.path import expanduser
+from prompt_toolkit.formatted_text import FormattedText
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -21,10 +22,11 @@ def get_east_asian_width_count(text):
 
 
 class GCalender():
-    def __init__(self, events_top, today_flag):
+    def __init__(self, events_top, today_flag, color):
         # OAuth
         self.events_top = events_top
         self.today_flag = today_flag
+        self.color = color
         self.credential = None
         self._make_credential()
         self.service = build('calendar', 'v3', credentials=self.credential)
@@ -103,6 +105,40 @@ class GCalender():
             if count >= self.events_top:
                 break
         return text
+
+    def get_calender_text_formatted(self):
+        text = []
+        count = 0
+        today = datetime.datetime.now()
+        events = [
+            x for x in self.events
+            if x['month'] == today.month and x['day'] == today.day
+        ] if self.today_flag else self.events
+
+        if len(events) == 0:
+            return 'not found events!'
+        for e in events:
+            t = '{:2d}/{:02} {} > {}\n'.format(
+                e['month'], e['day'],
+                '     ' if e['hour'] is None else '{:2d}:{:02}'.format(
+                    e['hour'], e['minute']), e['title'])
+            # formatted
+            if e['month'] == today.month and e['day'] == today.day and e[
+                    'hour'] is not None and self.color:
+                d = (e['hour'] * 60 + e['minute']) - (
+                    today.hour * 60 + today.minute)
+                if d <= 5 and d > 0:
+                    text.append(('#FF0000', t))
+                elif d <= 0 and d >= -15:
+                    text.append(('#008000', t))
+                else:
+                    text.append(('#ffffff', t))
+            else:
+                text.append(('#ffffff', t))
+            count += 1
+            if count >= self.events_top:
+                break
+        return FormattedText(text)
 
     def get_max_length(self):
         return max([
