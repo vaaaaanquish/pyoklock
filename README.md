@@ -50,6 +50,12 @@ for example:
 ```
 pyoklock -g --events 5
 ```
+  
+If you want to put `event of today only`, using '-t' or `--today` args.  
+for example:
+```
+pyoklock -g -t --events 10
+```
 
 
 # Special thanks to

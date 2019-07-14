@@ -16,9 +16,12 @@ from clocks import BigClock
 from google_calender import GCalender
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--events', type=int, default=10)
+parser.add_argument(
+    '--events', type=int, default=10, help='recently events num')
 parser.add_argument('-s', '--second', action='store_true', help='print second')
 parser.add_argument('-f', '--frame', action='store_true', help='print frame')
+parser.add_argument(
+    '-t', '--today', action='store_true', help='print today event only')
 parser.add_argument(
     '-g',
     '--google_calender',
@@ -26,7 +29,7 @@ parser.add_argument(
     help='print google calender')
 
 
-def make_app(sec, width, frame=True, calender=True, events=10):
+def make_app(sec, width, frame=True, gcalender=None):
     """make auto refresh application class"""
     kb = KeyBindings()
 
@@ -49,15 +52,14 @@ def make_app(sec, width, frame=True, calender=True, events=10):
         always_hide_cursor=True)
     if frame:
         body = Frame(body)
-    if calender:
-        gcalender = GCalender(events)
+    if gcalender is None:
+        under_text = Window(height=padding, always_hide_cursor=True)
+    else:
         under_text = Window(
             content=FormattedTextControl(text=gcalender.get_calender_text),
             width=gcalender.get_max_length(),
             height=padding,
             always_hide_cursor=True)
-    else:
-        under_text = Window(height=padding, always_hide_cursor=True)
 
     # make container app
     root_container = HSplit([
@@ -73,12 +75,12 @@ def make_app(sec, width, frame=True, calender=True, events=10):
 
 def main():
     args = parser.parse_args()
+    gcalender = GCalender(args.events,
+                          args.today) if args.google_calender else None
     if args.second:
-        app = make_app(True, 124, args.frame, args.google_calender,
-                       args.events)
+        app = make_app(True, 124, args.frame, gcalender)
     else:
-        app = make_app(False, 80, args.frame, args.google_calender,
-                       args.events)
+        app = make_app(False, 80, args.frame, gcalender)
     app.run()
 
 
