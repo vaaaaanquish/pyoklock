@@ -67,7 +67,7 @@ def main():
         elif args.model == 2:
             app = make_app(True, 124, 14, args.frame, gcalender, args.color)
         else:
-            app = make_app(True, 84, 9, args.frame, gcalender, args.color)
+            app = make_app(True, 83, 9, args.frame, gcalender, args.color)
     else:
         if args.model == 0:
             app = make_app(True, 36, 7, args.frame, gcalender, args.color)

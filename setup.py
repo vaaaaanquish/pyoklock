@@ -10,7 +10,7 @@ install_requires = ['prompt-toolkit', 'google-api-python-client', 'google-auth-h
 
 setup(
     name='pyoklock',
-    version='0.0.5',
+    version='0.0.6',
     description='python cli digital clock.',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",

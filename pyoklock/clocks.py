@@ -127,7 +127,7 @@ class SmallClock:
     def get_clock(self):
         """make clock text"""
         if self.sec:
-            clock = np.array([[background_char] * 82] * 9)
+            clock = np.array([[background_char] * 83] * 9)
         else:
             clock = np.array([[background_char] * 53] * 9)
         now = dt.now()
@@ -138,8 +138,8 @@ class SmallClock:
         clock[1:8, 43:52] = self.get_number(now.minute % 10)
         if self.sec:
             clock[1:8, 53:59] = self.get_coron()
-            clock[1:8, 60:69] = self.get_number(now.second // 10)
-            clock[1:8, 72:81] = self.get_number(now.second % 10)
+            clock[1:8, 61:70] = self.get_number(now.second // 10)
+            clock[1:8, 73:82] = self.get_number(now.second % 10)
 
         t = '\n'.join([''.join(x) for x in clock])
         # 5 min bofore, 15 min after events
