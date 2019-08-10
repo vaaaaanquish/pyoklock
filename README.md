@@ -7,6 +7,7 @@ python cli clock. Display digital clock on terminal.
 
 ## install
 ```
+# require ptk 3.x : https://github.com/prompt-toolkit/python-prompt-toolkit
 pip install pyoklock
 ```
 
@@ -68,6 +69,28 @@ If you want to change the color according to the time, using `-c` or `--color` a
 
 ![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/color.png?raw=true)
 
+
+## args: model
+
+If you want to change clock size, add `--model` to the argument.  
+Selectable numbers are {0,1,2}. default is 1.  
+for example:
+```
+pyoklock -f -s --model 0
+```
+![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/models.png?raw=true)
+
+
+## change digit character
+
+If you want to change clock's character, set `$PYOKLOCK_BACK_CHAR` or `$PYOKLOCK_DIGIT_CHAR` to OS environment.  
+for example:
+```
+export PYOKLOCK_BACK_CHAR="@"
+export PYOKLOCK_DIGIT_CHAR=" "
+pyoklock -s
+```
+![screenshot](https://github.com/6syun9/pyoklock/blob/master/images/char.png?raw=true)
 
 # Special thanks to
  - [python prompt-toolkit](https://github.com/prompt-toolkit/python-prompt-toolkit) : pyoklock made by this cli tools.
