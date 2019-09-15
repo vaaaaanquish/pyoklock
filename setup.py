@@ -14,7 +14,7 @@ setup(
     description='python cli digital clock.',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url='https://github.com/6syun9/pyoklock',
+    url='https://github.com/vaaaaanquish/pyoklock',
     license='MIT',
     author='vaaaaanquish',
     author_email='6syun9@gmail.com',
